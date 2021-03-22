@@ -83,26 +83,26 @@ class Animation(Widget):
 			self.up.points = [350, 600, self.base1, self.tall, self.base2, self.tall]
 			
 		#lower sand increasing
-		if self.lineY <= 580:
-			self.lineY += self.speed
-			self.xl += (self.speed/2)
-			self.xr -= (self.speed/2)
+		if self.lineY <= 500:
+			self.lineY += self.speed/2
+			self.xl += (self.speed/4)
+			self.xr -= (self.speed/4)
 			self.topLine.points = [(self.xl, self.lineY), (self.xr, self.lineY)]
 			
-			self.rexH += self.speed
-			self.rexW -= self.speed
-			self.rexX += self.speed/2
+			self.rexH += self.speed/2
+			self.rexW -= self.speed/2
+			self.rexX += self.speed/4
 			self.rex.size = (self.rexW, self.rexH)
 			self.rex.pos = (self.rexX, self.rexY)
 			
-			self.triLBX += self.speed/2
-			self.triLHX += self.speed/2
-			self.triLHY += self.speed
+			self.triLBX += self.speed/4
+			self.triLHX += self.speed/4
+			self.triLHY += self.speed/2
 			self.triL.points = [250, 400, self.triLBX, self.triLBY, self.triLHX, self.triLHY]
 			
-			self.triRBX -= self.speed/2
-			self.triRHX -= self.speed/2
-			self.triRHY += self.speed
+			self.triRBX -= self.speed/4
+			self.triRHX -= self.speed/4
+			self.triRHY += self.speed/2
 			self.triR.points = [450, 400, self.triRBX, self.triRBY, self.triRHX, self.triRHY]
 											
 class MyApp(App):
