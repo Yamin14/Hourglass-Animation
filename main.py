@@ -8,8 +8,9 @@ from kivy.clock import Clock
 class Animation(Widget):
 	def __init__(self, **kwargs):
 		super(Animation, self).__init__(**kwargs)
-		self.play()
 		self.start = False
+		self.flag = False
+		self.play()	
 		
 	def play(self):
 		with self.canvas:
@@ -60,12 +61,18 @@ class Animation(Widget):
 			self.grainsNum = 40
 			self.grains = []
 			self.dec = 5
-			self.speed = 0.5
+			self.speed = 0.051
 			Color(rgba=col)
 			for i in range(self.grainsNum):
 				self.grains.append(Ellipse(size=self.grainSize, pos=(self.grainPos[0], self.grainPos[1]+(i*5))))
+				
+		#timer
+		self.time = 60
+		self.timerLabel = Label(text=f"Timer: {self.time}", font_size=70, color=(0, 1, 1, 1), pos=(300, 830))
+		self.add_widget(self.timerLabel)
 
 		Clock.schedule_interval(self.falling, 0)
+		Clock.schedule_interval(self.timer, 1)
 			
 	def falling(self, dt):
 		#grains falling
@@ -107,6 +114,14 @@ class Animation(Widget):
 			self.triRHX -= self.speed/4
 			self.triRHY += self.speed/2
 			self.triR.points = [450, 400, self.triRBX, self.triRBY, self.triRHX, self.triRHY]
+			
+		elif self.lineY > 490:
+			self.flag = True
+
+	def timer(self, dt):
+		if self.flag == False:
+			self.time -= 1
+			self.timerLabel.text = f"Timer: {self.time}"																									
 											
 class MyApp(App):
 	def build(self):
