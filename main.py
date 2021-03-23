@@ -9,6 +9,7 @@ class Animation(Widget):
 	def __init__(self, **kwargs):
 		super(Animation, self).__init__(**kwargs)
 		self.play()
+		self.start = False
 		
 	def play(self):
 		with self.canvas:
@@ -71,9 +72,11 @@ class Animation(Widget):
 		for i in range(self.grainsNum):
 			if self.grains[i].pos[1] > 400:
 				self.grains[i].pos = (self.grainPos[0], self.grains[i].pos[1] - self.dec)
-			
 			elif self.tall >= 600:
 				self.grains[i].pos = (self.grainPos[0], self.grainPos[1])
+				
+			if self.grains[i].pos[1] <= 405:
+				self.start = True
 				
 		#upper sand decreasing
 		if self.tall >= 600:
@@ -83,7 +86,7 @@ class Animation(Widget):
 			self.up.points = [350, 600, self.base1, self.tall, self.base2, self.tall]
 			
 		#lower sand increasing
-		if self.lineY <= 500:
+		if self.lineY <= 490 and self.start == True:
 			self.lineY += self.speed/2
 			self.xl += (self.speed/4)
 			self.xr -= (self.speed/4)
